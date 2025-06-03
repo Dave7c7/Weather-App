@@ -3,6 +3,14 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import React, { useEffect } from 'react';
+import { BasicTextFields } from './Components/BasicTextFields';
+import BasicCard from './Components/BasicCard';
+
+
+
+
+//import * as React from 'react';
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +31,7 @@ function App() {
 
   return (
     <>
+      <BasicTextFields></BasicTextFields>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -51,6 +60,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <BasicCard></BasicCard>
     </>
   )
 }
