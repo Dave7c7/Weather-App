@@ -36,6 +36,14 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <br />
+        <label htmlFor="StateName">State: </label>
+        <input type="text" className="StateName"/>
+        <br />
+        <label htmlFor="CityName">City: </label>
+        <input type="text" className="CityName" />
+        <br />
+        <input type="submit" /> 
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
