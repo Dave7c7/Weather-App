@@ -2,9 +2,24 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import React, { useEffect } from 'react';
 
 function App() {
   const [count, setCount] = useState(0)
+  
+  const [posts, setPosts] = useState([]);
+   useEffect(() => {
+      fetch('https://api.openweathermap.org/data/2.5/weather?q=London&appid=f1e2934521fa36b08463620921ae8927')
+         .then((response) => response.json())
+         .then((data) => {
+            console.log(data);
+            setPosts(data);
+         })
+         .catch((err) => {
+            console.log(err.message);
+         });
+   }, []);
+
 
   return (
     <>
