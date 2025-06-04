@@ -14,38 +14,19 @@ import BasicCard from './Components/BasicCard';
 
 function App() {
   const [count, setCount] = useState(0)
+  const [weatherData, setWeatherData] = useState(null)
   
-  const [posts, setPosts] = useState([]);
-   useEffect(() => {
-      fetch('https://api.openweathermap.org/data/2.5/weather?q=London&appid=f1e2934521fa36b08463620921ae8927')
-         .then((response) => response.json())
-         .then((data) => {
-            console.log(data);
-            setPosts(data);
-         })
-         .catch((err) => {
-            console.log(err.message);
-         });
-   }, []);
-
+  const handleWeatherData = (data) => {
+    setWeatherData(data)
+  }
 
   return (
     <>
-      <BasicTextFields></BasicTextFields>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+        
+      
+      <h1>weather app</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <br />
+        <br/>
         <label htmlFor="StateName">State: </label>
         <input type="text" className="StateName"/>
         <br />
@@ -60,7 +41,9 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <BasicCard></BasicCard>
+      <BasicTextFields onWeatherDataChange={handleWeatherData}></BasicTextFields>
+
+      <BasicCard weatherData={weatherData}></BasicCard>
     </>
   )
 }
