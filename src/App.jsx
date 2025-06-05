@@ -13,20 +13,24 @@ import BasicCard from './Components/BasicCard';
 
 
 function App() {
-  const [count, setCount] = useState(0)
-  
+  const [Location, setLocation] = useState(`United States`)
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${Location}&appid=f1e2934521fa36b08463620921ae8927`
   const [posts, setPosts] = useState([]);
-   useEffect(() => {
-      fetch('https://api.openweathermap.org/data/2.5/weather?q=London&appid=f1e2934521fa36b08463620921ae8927')
-         .then((response) => response.json())
-         .then((data) => {
-            console.log(data);
-            setPosts(data);
-         })
-         .catch((err) => {
-            console.log(err.message);
-         });
-   }, []);
+    useEffect(() => {
+      fetchWeather()
+  }, [Location]);
+
+  const fetchWeather = () =>{
+    fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      setPosts(data);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  }
 
 
   return (
@@ -42,17 +46,27 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+
+        <div>
+          The current weather for {Location}
+          <br />
+          {
+          /*
+            Find a way to display the weather for the current location here
+          */
+          posts.data}
+        </div>
+
+        <br />
+        <label htmlFor="Location">Location: </label>
+        <input id="Location" type="text" />
+        <br />
+        <button id="submit" onClick={() => setLocation((Location) =>{
+          Location=document.getElementById("Location").value
+          return Location
+        })}>
+          Search
         </button>
-        <br />
-        <label htmlFor="StateName">State: </label>
-        <input type="text" className="StateName"/>
-        <br />
-        <label htmlFor="CityName">City: </label>
-        <input type="text" className="CityName" />
-        <br />
-        <input type="submit" /> 
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
