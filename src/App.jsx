@@ -16,30 +16,17 @@ function App() {
 
   const [count, setCount] = useState(0)
   const [weatherData, setWeatherData] = useState(null)
+  const [posts, setPosts] = useState([])
+  const [Location, setLocation] = useState(`United States`)
+
   
+    const handleCityChange = (event) => {
+    setLocation(event.target.value);
+  };
   const handleWeatherData = (data) => {
     setWeatherData(data)
   }
-
-  const [Location, setLocation] = useState(`United States`)
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${Location}&appid=f1e2934521fa36b08463620921ae8927`
-  const [posts, setPosts] = useState([]);
-    useEffect(() => {
-      fetchWeather()
-  }, [Location]);
-
-  const fetchWeather = () =>{
-    fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      setPosts(data);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-  }
-
+  console.log(weatherData)
 
 
   return (
@@ -67,7 +54,6 @@ function App() {
 
         <br />
         <label htmlFor="Location">Location: </label>
-        <input id="Location" type="text" />
         <br />
         <button id="submit" onClick={() => setLocation((Location) =>{
           Location=document.getElementById("Location").value
@@ -82,7 +68,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <BasicTextFields onWeatherDataChange={handleWeatherData}></BasicTextFields>
+      <BasicTextFields handleCityChange={handleCityChange} onWeatherDataChange={handleWeatherData} location={Location}></BasicTextFields>
 
       <BasicCard weatherData={weatherData}></BasicCard>
     </>

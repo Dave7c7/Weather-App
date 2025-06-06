@@ -2,30 +2,32 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from 'react';
 
-export function BasicTextFields({ onWeatherDataChange }) {
+export function BasicTextFields({ onWeatherDataChange, location, handleCityChange }) {
   const [posts, setPosts] = useState([]);
-  const [city, setCity] = useState("New York");
-
-  const handleCityChange = (event) => {
-    setCity(event.target.value);
-  };
 
   const apiKey = "f1e2934521fa36b08463620921ae8927"
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`
+
+  
 
   useEffect(() => {
     fetch(url)
        .then((response) => response.json())
        .then((data) => {
         console.log(data);
-        console.log(city);
+        console.log(location);
+        if (!data.cod || data.cod === '404' || data.cod === '400') {
+          console.log('Invalid data received');
+          return;
+        }
+
         onWeatherDataChange(data); // Send data to parent
         setPosts(data);
        })
        .catch((err) => {
         console.log(err.message);
        });
-   }, [city, url]);
+   }, [location, url]);
 
   return (
     <Box
@@ -35,10 +37,10 @@ export function BasicTextFields({ onWeatherDataChange }) {
       autoComplete="off"
     >
       <TextField 
-        id="outlined-basic" 
+        id="Location" 
         label="City" 
         variant="outlined"
-        value={city}
+        value={location}
         onChange={handleCityChange}
       />
     </Box>
