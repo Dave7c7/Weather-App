@@ -6,15 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
-
 export default function BasicCard({weatherData}) {
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -26,9 +17,10 @@ export default function BasicCard({weatherData}) {
           {weatherData?.name}
         </Typography>
         <Typography variant="body2">
-          {"temperature::" + weatherData?.main?.temp}
+          {"Temperature: " + ((weatherData?.main?.temp - 273.15) * 9/5 + 32).toFixed(2)+"°F"}
           <br />
-          {"feels like temperature::" + weatherData?.main?.feels_like}
+          {"Temperature: " + ((weatherData?.main?.temp - 273.15)).toFixed(2)+"°C"}
+          <br />
         </Typography>
       </CardContent>
     </Card>

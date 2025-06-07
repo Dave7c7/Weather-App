@@ -31,10 +31,10 @@ function App() {
 
   return (
     <>
-      <h1>weather app</h1>
+      <h1>Weather App</h1>
       <div className="card">
         <div>
-          The current weather for {Location}
+          Here's the current weather for
           <br />
         <BasicTextFields handleCityChange={handleCityChange} onWeatherDataChange={handleWeatherData} location={Location}></BasicTextFields>
         <BasicCard weatherData={weatherData}></BasicCard>
