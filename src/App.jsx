@@ -43,6 +43,7 @@ function App() {
 
         <div>
           The current weather for {Location}
+          It's so warm today
           <br />
           {
           /*
