@@ -34,7 +34,8 @@ function App() {
       <h1>Weather App</h1>
       <div className="card">
         <div>
-          Here's the current weather for
+          The current weather for {Location}
+          It's so warm today
           <br />
         <BasicTextFields handleCityChange={handleCityChange} onWeatherDataChange={handleWeatherData} location={Location}></BasicTextFields>
         <BasicCard weatherData={weatherData}></BasicCard>
