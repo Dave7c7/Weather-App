@@ -23,18 +23,14 @@ export default function BasicCard({weatherData}) {
           {weatherData?.weather[0]?.main}
         </Typography>
         <Typography variant="h5" component="div">
-          be{bull}{weatherData?.name}{bull}lent
+          {weatherData?.name}
         </Typography>
-        <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>adjective</Typography>
         <Typography variant="body2">
           {"temperature::" + weatherData?.main?.temp}
           <br />
           {"feels like temperature::" + weatherData?.main?.feels_like}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 }
