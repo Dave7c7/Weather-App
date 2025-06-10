@@ -32,24 +32,13 @@ function App() {
 
   return (
     <>
-        
-      
-      <h1>weather app</h1>
+      <h1>Weather App</h1>
       <div className="card">
-
-        <br/>
-        <label htmlFor="StateName">State: </label>
-        <input type="text" className="StateName"/>
-
-
         <div>
-          The current weather for {Location}
+          The current weather for
           <br />
-          {
-          /*
-            Find a way to display the weather for the current location here
-          */
-          posts.data}
+        <BasicTextFields handleCityChange={handleCityChange} onWeatherDataChange={handleWeatherData} location={Location}></BasicTextFields>
+        <BasicCard weatherData={weatherData}></BasicCard>
         </div>
 
 
@@ -57,15 +46,6 @@ function App() {
         <label htmlFor="Location">Location: </label>
         <input type="text" id="Location" placeholder='Enter city' />
         <br />
-        <button id="submit" onClick={() => setLocation((Location) =>{
-          Location=document.getElementById("Location").value
-          return Location
-        })}>
-          Search
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
@@ -74,6 +54,7 @@ function App() {
 
       <BasicCard weatherData={weatherData}></BasicCard>
       <Table location={Location}></Table>
+
 
     </>
   )
