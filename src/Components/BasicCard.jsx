@@ -1,3 +1,4 @@
+import './BasicCard.css'
 import App from '../App';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -17,10 +18,23 @@ export default function BasicCard({weatherData}) {
           {weatherData?.name}
         </Typography>
         <Typography variant="body2">
-          {"Temperature: " + ((weatherData?.main?.temp - 273.15) * 9/5 + 32).toFixed(2)+"°F"}
+          <label class="switch">
+            <input type="checkbox" id="toggle"/>
+            <span class="slider round">Fahrenheit Celsius</span>
+          </label>
           <br />
-          {"Temperature: " + ((weatherData?.main?.temp - 273.15)).toFixed(2)+"°C"}
+          {
+          /*if(){
+            {((weatherData?.main?.temp - 273.15) * 9/5 + 32).toFixed(2)+"°F"}
+          }
+          else{
+            {((weatherData?.main?.temp - 273.15)).toFixed(2)+"°C"}}
+          }*/          
+          }
+          {"Temperature: "}
+          {((weatherData?.main?.temp - 273.15) * 9/5 + 32).toFixed(2)+"°F"}
           <br />
+          {((weatherData?.main?.temp - 273.15)).toFixed(2)+"°C"}
         </Typography>
       </CardContent>
     </Card>
