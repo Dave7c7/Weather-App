@@ -1,24 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {useState} from 'react'
 import './App.css'
-import React, { useEffect } from 'react';
-import { BasicTextFields } from './Components/BasicTextFields';
+import {BasicTextFields} from './Components/BasicTextFields';
 import BasicCard from './Components/BasicCard';
-
-
-
-
-//import * as React from 'react';
-
+import Table from './Components/Table';
 
 function App() {
-
-  const [count, setCount] = useState(0)
   const [weatherData, setWeatherData] = useState(null)
-  const [posts, setPosts] = useState([])
   const [Location, setLocation] = useState(`United States`)
+  const [isChecked, setIsChecked] = useState(false)
 
+  function handleCheck(event){
+    const checked = event.target.checked
+    setIsChecked(checked)
+    convertTemp(checked)
+  }
+  function convertTemp(isChecked){
+    if(isChecked){
+      return ((weatherData?.main?.temp - 273.15).toFixed(2)+"°C")
+    }
+    else{
+      return (((weatherData?.main?.temp - 273.15) * 9/5 + 32).toFixed(2)+"°F")
+    }
+  }
   
     const handleCityChange = (event) => {
     setLocation(event.target.value);
@@ -34,14 +37,16 @@ function App() {
       <h1>Weather App</h1>
       <div className="card">
         <div>
-          The current weather for {Location}
-          It's so warm today
+          The current weather for
           <br />
         <BasicTextFields handleCityChange={handleCityChange} onWeatherDataChange={handleWeatherData} location={Location}></BasicTextFields>
-        <BasicCard weatherData={weatherData}></BasicCard>
+        <BasicCard weatherData={weatherData}
+        handleCheck={handleCheck}
+        convertTemp={convertTemp}
+        isChecked={isChecked}></BasicCard>
         </div>
-        <br />
       </div>
+      <Table location={Location}></Table>
     </>
   )
 }
