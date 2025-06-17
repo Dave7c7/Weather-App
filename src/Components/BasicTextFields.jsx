@@ -4,24 +4,19 @@ import { useState, useEffect } from 'react';
 
 export function BasicTextFields({ onWeatherDataChange, location, handleCityChange }) {
   const [posts, setPosts] = useState([]);
-
   const apiKey = "f1e2934521fa36b08463620921ae8927"
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`
-
-  
 
   useEffect(() => {
     fetch(url)
        .then((response) => response.json())
        .then((data) => {
-        console.log(data);
-        console.log(location);
         if (!data.cod || data.cod === '404' || data.cod === '400') {
-          console.log('Invalid data received');
+          console.log('Invalid data');
           return;
         }
 
-        onWeatherDataChange(data); // Send data to parent
+        onWeatherDataChange(data);
         setPosts(data);
        })
        .catch((err) => {
@@ -38,7 +33,7 @@ export function BasicTextFields({ onWeatherDataChange, location, handleCityChang
     >
       <TextField 
         id="Location" 
-        label="City" 
+        label="Enter a location" 
         variant="outlined"
         value={location}
         onChange={handleCityChange}

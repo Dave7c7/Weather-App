@@ -1,27 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {useState} from 'react'
 import './App.css'
-import React, { useEffect } from 'react';
-import { BasicTextFields } from './Components/BasicTextFields';
+import {BasicTextFields} from './Components/BasicTextFields';
 import BasicCard from './Components/BasicCard';
 import WeatherSignIn from './Components/WeatherSignIn';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route,link } from "react-router-dom";
 
 
 
-
-
-//import * as React from 'react';
 
 
 function App() {
-
-  const [count, setCount] = useState(0)
   const [weatherData, setWeatherData] = useState(null)
-  const [posts, setPosts] = useState([])
   const [Location, setLocation] = useState(`United States`)
+  const [isChecked, setIsChecked] = useState(false)
 
+  function handleCheck(event){
+    const checked = event.target.checked
+    setIsChecked(checked)
+    convertTemp(checked)
+  }
+  function convertTemp(isChecked){
+    if(isChecked){
+      return ((weatherData?.main?.temp - 273.15).toFixed(2)+"°C")
+    }
+    else{
+      return (((weatherData?.main?.temp - 273.15) * 9/5 + 32).toFixed(2)+"°F")
+    }
+  }
   
     const handleCityChange = (event) => {
     setLocation(event.target.value);
@@ -38,10 +43,12 @@ function App() {
       <div className="card">
         <div>
           The current weather for {Location}
+
           <br />
           It's so warm today
           <br /> 
         <BasicTextFields handleCityChange={handleCityChange} onWeatherDataChange={handleWeatherData} location={Location}></BasicTextFields>
+
         <BasicCard weatherData={weatherData}></BasicCard>
         
 
@@ -50,14 +57,14 @@ function App() {
 
 
 
+
         </div>
-        <br />
       </div>
+      <Table location={Location}></Table>
     </>
   )
 }
 
-import { Link } from "react-router-dom";
 
 <Link to="/signin">Sign In</Link>
 
