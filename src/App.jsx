@@ -2,7 +2,12 @@ import {useState} from 'react'
 import './App.css'
 import {BasicTextFields} from './Components/BasicTextFields';
 import BasicCard from './Components/BasicCard';
-import Table from './Components/Table';
+import WeatherSignIn from './Components/WeatherSignIn';
+import { BrowserRouter, Routes, Route,link } from "react-router-dom";
+
+
+
+
 
 function App() {
   const [weatherData, setWeatherData] = useState(null)
@@ -37,18 +42,31 @@ function App() {
       <h1>Weather App</h1>
       <div className="card">
         <div>
-          The current weather for
+          The current weather for {Location}
+
           <br />
+          It's so warm today
+          <br /> 
         <BasicTextFields handleCityChange={handleCityChange} onWeatherDataChange={handleWeatherData} location={Location}></BasicTextFields>
-        <BasicCard weatherData={weatherData}
-        handleCheck={handleCheck}
-        convertTemp={convertTemp}
-        isChecked={isChecked}></BasicCard>
+
+        <BasicCard weatherData={weatherData}></BasicCard>
+        
+
+        <Link to="/signin">Sign In</Link>
+
+
+
+
+
         </div>
       </div>
       <Table location={Location}></Table>
     </>
   )
 }
+
+
+<Link to="/signin">Sign In</Link>
+
 
 export default App
