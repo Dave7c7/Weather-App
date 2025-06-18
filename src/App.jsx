@@ -1,9 +1,10 @@
 import {useState} from 'react'
 import './App.css'
+import Table from './Components/Table';
 import {BasicTextFields} from './Components/BasicTextFields';
 import BasicCard from './Components/BasicCard';
 import WeatherSignIn from './Components/WeatherSignIn';
-import { BrowserRouter, Routes, Route,link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 
 
@@ -49,7 +50,7 @@ function App() {
           <br /> 
         <BasicTextFields handleCityChange={handleCityChange} onWeatherDataChange={handleWeatherData} location={Location}></BasicTextFields>
 
-        <BasicCard weatherData={weatherData}></BasicCard>
+        <BasicCard weatherData={weatherData} handleCheck={handleCheck} convertTemp={convertTemp} isChecked={isChecked}></BasicCard>
         
 
         <Link to="/signin">Sign In</Link>

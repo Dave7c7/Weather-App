@@ -18,7 +18,7 @@ root.render(
 
         {/* Sign-in page */}
         <Route path="/signin" element={<WeatherSignIn />} />
-       <Route path="/login" element={<WeatherLogIn />} />
+       {/* <Route path="/login" element={<WeatherLogIn />} /> */}
         {/* Catch-all 404 page */}
         <Route path="*" element={<h2>Page not found</h2>} />
       </Routes>
